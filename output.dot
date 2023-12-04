@@ -1,0 +1,30 @@
+# test_system_cmd.exs
+defmodule DotGenerator do
+  defp generate_dot_graph do
+    """
+    digraph G {
+      a -> b
+    }
+    """
+  end
+
+  def generate_image do
+    dot_file = "output.dot"
+    File.write!(dot_file, generate_dot_graph())
+
+    # Comando para gerar a imagem
+    {status, result} = System.cmd("dot", ["-Tpng", dot_file, "-o", "output.png"])
+
+    # Verifica o status do comando
+    if status == 0 do
+      IO.puts("Imagem gerada com sucesso!")
+    else
+      IO.puts("Erro ao gerar a imagem. Status: #{status}")
+      IO.puts("Saída do comando: #{result}")
+    e
+
+defp deps do
+  [
+    {:mox, "~> 1.6"}
+  ]
+end
